@@ -99,6 +99,29 @@ public class CucumberChessAnalysis
     	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "128px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
 
     }
+    
+
+    @When("^they click on the g(\\d+) knight$")
+    public void they_click_on_the_g_knight(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOng1Knight();
+    }
+
+    @Then("^an option to move it to f(\\d+) is shown$")
+    public void an_option_to_move_it_to_f_is_shown(int arg1) throws Throwable 
+    {
+    	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
+    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest1Location(), "320px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
+    }
+
+    @Then("^an option to move it to h(\\d+) is shown$")
+    public void an_option_to_move_it_to_h_is_shown(int arg1) throws Throwable 
+    {
+    	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
+    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "448px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
+    }
+
+
 
     @After
     public void afterTest() {

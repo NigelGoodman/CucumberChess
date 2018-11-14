@@ -13,8 +13,14 @@ Scenario: Turn on analysis
  When they turn the analysis on
  Then analysis activates
  
-Scenario: Move knights from opening squares
+Scenario Outline: Move knights from opening squares
 	Given the user is on the analysis board
-	When they click on the b1 knight
-	Then an option to move it to a3 is shown
-	And an option to move it to c3 is shown
+	When they click on the <knight> knight
+	Then an option to move it to <location1> is shown
+	And an option to move it to <location2> is shown
+	Examples: 
+	| knight | location1 | location2 |
+	|   b1   |     a3    |    c3     |
+	|   g1   |     f3    |    h3     |
+	
+	

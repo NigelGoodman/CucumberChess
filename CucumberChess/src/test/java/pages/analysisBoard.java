@@ -12,7 +12,8 @@ public class analysisBoard
 	private static char[] titleOfPage = "Analysis board • lichess.org".toCharArray();
 	private static By analysisSwitch = By.className("switch");
 	private static By currentEvaluation = By.tagName("pearl");
-	private static By b1Knight = By.cssSelector("piece.white:nth-child(26)");
+	private static By b1Knight = By.cssSelector("piece.white.knight:nth-child(26)");
+	private static By g1Knight = By.cssSelector("piece.white.knight:nth-child(31)");
 	private static By dest1 = By.cssSelector("square.move-dest:nth-child(2)");
 	private static By dest2 = By.cssSelector("square.move-dest:nth-child(1)");
 		
@@ -51,6 +52,17 @@ public class analysisBoard
 		moveToLocOnBoard.click();
 		moveToLocOnBoard.perform();
 		//driver.findElement(b1Knight).click(); // lichess seems to have placed the board on top of the actual pieces. 
+												// Using actions to work around this issue
+	}
+	
+	public void clickOng1Knight()
+	{		
+		Actions moveToLocOnBoard = new Actions(driver);
+		
+		moveToLocOnBoard.moveToElement(driver.findElement(g1Knight));
+		moveToLocOnBoard.click();
+		moveToLocOnBoard.perform();
+		//driver.findElement(g1Knight).click(); // lichess seems to have placed the board on top of the actual pieces. 
 												// Using actions to work around this issue
 	}
 	
