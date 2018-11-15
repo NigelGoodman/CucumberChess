@@ -83,20 +83,20 @@ public class CucumberChessAnalysis
     	testAnalysisBoard.clickOnb1Knight();
     }
 
-    @Then("^an option to move it to a(\\d+) is shown$")
-    public void an_option_to_move_it_to_a_is_shown(int arg1) throws Throwable 
+    @Then("^an option to move the knight to a(\\d+) is shown$")
+    public void an_option_to_move_the_knight_to_a_is_shown(int arg1) throws Throwable 
     {
     	
-    	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest1Location(), "0px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
+    	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
+    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "0px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
     	
     }
 
-    @Then("^an option to move it to c(\\d+) is shown$")
-    public void an_option_to_move_it_to_c_is_shown(int arg1) throws Throwable 
+    @Then("^an option to move knight to c(\\d+) is shown$")
+    public void an_option_to_move_knight_to_c_is_shown(int arg1) throws Throwable 
     {
-    	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "128px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
+    	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
+    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest1Location(), "128px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
 
     }
     
@@ -107,24 +107,83 @@ public class CucumberChessAnalysis
     	testAnalysisBoard.clickOng1Knight();
     }
 
-    @Then("^an option to move it to f(\\d+) is shown$")
-    public void an_option_to_move_it_to_f_is_shown(int arg1) throws Throwable 
-    {
-    	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest1Location(), "320px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
-    }
-
-    @Then("^an option to move it to h(\\d+) is shown$")
-    public void an_option_to_move_it_to_h_is_shown(int arg1) throws Throwable 
+    @Then("^an option to move the knight to f(\\d+) is shown$")
+    public void an_option_to_move_the_knight_to_f_is_shown(int arg1) throws Throwable 
     {
     	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "448px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
+    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "320px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
+    }
+
+    @Then("^an option to move knight to h(\\d+) is shown$")
+    public void an_option_to_move_knight_to_h_is_shown(int arg1) throws Throwable 
+    {
+    	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
+    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest1Location(), "448px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
     }
 
 
 
+    @When("^they click on the a(\\d+) pawn$")
+    public void they_click_on_the_a_pawn(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOnA2Pawn();
+    }
+
+    @When("^they click on the b(\\d+) pawn$")
+    public void they_click_on_the_b_pawn(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOnB2Pawn();
+    }
+
+    @When("^they click on the c(\\d+) pawn$")
+	public void they_click_on_the_c_pawn(int arg1) throws Throwable 
+	{
+		testAnalysisBoard.clickOnC2Pawn();
+	}
+
+    @When("^they click on the d(\\d+) pawn$")
+    public void they_click_on_the_d_pawn(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOnD2Pawn();
+    }
+
+    @When("^they click on the e(\\d+) pawn$")
+    public void they_click_on_the_e_pawn(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOnE2Pawn();
+    }
+
+    @When("^they click on the f(\\d+) pawn$")
+    public void they_click_on_the_f_pawn(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOnF2Pawn();
+    }
+
+    @When("^they click on the g(\\d+) pawn$")
+    public void they_click_on_the_g_pawn(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOnG2Pawn();
+    }
+
+    @When("^they click on the h(\\d+) pawn$")
+    public void they_click_on_the_h_pawn(int arg1) throws Throwable 
+    {
+    	testAnalysisBoard.clickOnH2Pawn();
+    }
+
+
+    @Then("^an option to move the pawn to \"([^\"]*)\" is shown$")
+    public void an_option_to_move_the_pawn_to_is_shown(String arg1) throws Throwable 
+    {
+    	testAnalysisBoard.setExpectedPawnDestination(arg1);
+        Assert.assertTrue(testAnalysisBoard.expectedPawnDestinationIsVisible());
+    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.expectedPawnLocation(), testAnalysisBoard.expectedPawnLocation().toCharArray() , testAnalysisBoard.expectedPawnDestinationCharArr());
+
+    }
+
     @After
-    public void afterTest() {
+    public void afterTest() 
+    {
     	driver.quit();
     }
     
