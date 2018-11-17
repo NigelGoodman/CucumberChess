@@ -39,4 +39,9 @@ Scenario Outline: Move pips shown for pawns from opening squares
 	|   g2   |     "g3"    |    "g4"     |
 	|   h2   |     "h3"    |    "h4"     |	
 	
+Scenario: Playing the Ruy Lopez is recognised as by the opening display
+	Given the user is on the analysis board
+	And the moves "1. e4 e5 2. Nf3 Nc6" have been played
+	When the move "3. Bb5" is played
+	Then the opening display shows "C60 Ruy Lopez"
 	

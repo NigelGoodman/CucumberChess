@@ -14,6 +14,9 @@ public class analysisBoard
 	private static By currentEvaluation = By.tagName("pearl");
 	private static By b1Knight = By.cssSelector("piece.white.knight:nth-child(26)");
 	private static By g1Knight = By.cssSelector("piece.white.knight:nth-child(31)");
+	private static By ruyLopezg1Knight  = By.cssSelector("piece.white.knight:nth-child(33)");
+	private static By b8Knight = By.cssSelector("piece.black.knight:nth-child(4)");
+	private static By f1Bishop = By.cssSelector("piece.white.bishop:nth-child(32)");
 	private static By a2Pawn = By.cssSelector("piece.white.pawn:nth-child(17)");
 	private static By b2Pawn = By.cssSelector("piece.white.pawn:nth-child(18)");
 	private static By c2Pawn = By.cssSelector("piece.white.pawn:nth-child(19)");
@@ -24,6 +27,9 @@ public class analysisBoard
 	private static By h2Pawn = By.cssSelector("piece.white.pawn:nth-child(24)");
 	private static By dest1 = By.cssSelector("square.move-dest:nth-child(1)");
 	private static By dest2 = By.cssSelector("square.move-dest:nth-child(2)");
+	private static By dest3 = By.cssSelector("square.move-dest:nth-child(3)");
+	private static By e7Pawn = By.cssSelector("piece.black.pawn:nth-child(15)");
+	private static By openingBox = By.className("opening_box");
 	private static String expectedDestinationString;
 	private static By expectedDestinationBy;
 		
@@ -48,10 +54,20 @@ public class analysisBoard
 		return  driver.findElement(currentEvaluation).getText();
 	}
 	
-	public void waitUntilExpectedEvaluation(String expectedEval)
+	public void waitUntilExpectedString(String expectedString, By usedElement)
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
-	    wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(currentEvaluation), expectedEval));
+	    wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(usedElement), expectedString));
+	}
+	
+	public void waitUntilExpectedEvaluation(String expectedEval)
+	{
+		waitUntilExpectedString(expectedEval, currentEvaluation);
+	}
+	
+	public void waitUntilExpectedOpening(String expectedOpening)
+	{
+		waitUntilExpectedString(expectedOpening, openingBox);
 	}
 	
 	private void clickOnPiece(By pieceName)
@@ -114,6 +130,37 @@ public class analysisBoard
 	{		
 		this.clickOnPiece(h2Pawn);
 	}
+	
+	public void moveE2toE4()
+	{
+		this.clickOnPiece(e2Pawn);
+		this.clickOnPiece(dest1);
+	}
+	
+	public void moveE7toE5()
+	{
+		this.clickOnPiece(e7Pawn);
+		this.clickOnPiece(dest1);
+	}
+	
+	public void ruyLopezmoveNg1tof3()
+	{
+		this.clickOnPiece(ruyLopezg1Knight);
+		this.clickOnPiece(dest3);
+	}
+	
+	public void moveNb8toc6()
+	{
+		this.clickOnPiece(b8Knight);
+		this.clickOnPiece(dest1);
+	}
+	
+	public void moveBf1toc6()
+	{
+		this.clickOnPiece(f1Bishop);
+		this.clickOnPiece(dest2);
+	}
+	
 	
 	public boolean dest1IsVisible()
 	{
@@ -178,6 +225,11 @@ public class analysisBoard
 	{
 		return expectedDestinationString.toCharArray();
 		
+	}
+	
+	public String displayedOpening()
+	{
+		return driver.findElement(openingBox).getAttribute("title");
 	}
 	
 	

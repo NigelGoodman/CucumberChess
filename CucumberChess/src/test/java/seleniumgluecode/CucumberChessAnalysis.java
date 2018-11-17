@@ -72,7 +72,7 @@ public class CucumberChessAnalysis
     public void analysis_activates() throws Throwable 
     {
     	testAnalysisBoard.waitUntilExpectedEvaluation("+0.2");
-    	Assert.assertArrayEquals("actualText " + testAnalysisBoard.returnCurrentEvaluation(), "+0.2".toCharArray() , testAnalysisBoard.returnCurrentEvaluation().toCharArray());
+    	Assert.assertArrayEquals("Actual Evaluation : " + testAnalysisBoard.returnCurrentEvaluation(), "+0.2".toCharArray() , testAnalysisBoard.returnCurrentEvaluation().toCharArray());
         
     }
     
@@ -88,7 +88,7 @@ public class CucumberChessAnalysis
     {
     	
     	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "0px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
+    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest2Location(), "0px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
     	
     }
 
@@ -96,7 +96,7 @@ public class CucumberChessAnalysis
     public void an_option_to_move_knight_to_c_is_shown(int arg1) throws Throwable 
     {
     	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest1Location(), "128px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
+    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest1Location(), "128px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
 
     }
     
@@ -111,14 +111,14 @@ public class CucumberChessAnalysis
     public void an_option_to_move_the_knight_to_f_is_shown(int arg1) throws Throwable 
     {
     	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest2Location(), "320px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
+    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest2Location(), "320px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
     }
 
     @Then("^an option to move knight to h(\\d+) is shown$")
     public void an_option_to_move_knight_to_h_is_shown(int arg1) throws Throwable 
     {
     	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.dest1Location(), "448px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
+    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest1Location(), "448px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
     }
 
 
@@ -177,9 +177,37 @@ public class CucumberChessAnalysis
     {
     	testAnalysisBoard.setExpectedPawnDestination(arg1);
         Assert.assertTrue(testAnalysisBoard.expectedPawnDestinationIsVisible());
-    	Assert.assertArrayEquals("The thing is actually " + testAnalysisBoard.expectedPawnLocation(), testAnalysisBoard.expectedPawnLocation().toCharArray() , testAnalysisBoard.expectedPawnDestinationCharArr());
+    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.expectedPawnLocation(), testAnalysisBoard.expectedPawnLocation().toCharArray() , testAnalysisBoard.expectedPawnDestinationCharArr());
 
     }
+    
+
+    @Given("^the moves \"([^\"]*)\" have been played$")
+    public void the_moves_have_been_played(String arg1) throws Throwable 
+    {
+    	testAnalysisBoard.moveE2toE4();
+    	testAnalysisBoard.moveE7toE5();
+    	testAnalysisBoard.ruyLopezmoveNg1tof3();
+    	testAnalysisBoard.moveNb8toc6();
+    	
+    }
+
+    @When("^the move \"([^\"]*)\" is played$")
+    public void the_move_is_played(String arg1) throws Throwable 
+    {
+    
+    	testAnalysisBoard.moveBf1toc6();
+    }
+
+    @Then("^the opening display shows \"([^\"]*)\"$")
+    public void the_opening_display_shows(String arg1) throws Throwable 
+    {
+    	testAnalysisBoard.waitUntilExpectedOpening(arg1);
+    
+    	Assert.assertArrayEquals("Actual opening : " + testAnalysisBoard.displayedOpening(), arg1.toCharArray(), testAnalysisBoard.displayedOpening().toCharArray());
+    }
+
+
 
     @After
     public void afterTest() 
