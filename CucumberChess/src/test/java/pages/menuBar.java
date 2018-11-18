@@ -9,6 +9,7 @@ public class menuBar
 	private static WebDriver driver;
 	private static By toolsMenuButton = By.cssSelector("#topmenu > section:nth-child(5) > a:nth-child(1)");
 	private static By analysisBoardButton = By.linkText("Analysis board");
+	private static By importGameButton = By.cssSelector("#topmenu > section:nth-child(5) > div:nth-child(2) > a:nth-child(4)");//By.linkText("Import game");
 	
 	
 	
@@ -26,5 +27,10 @@ public class menuBar
 	public void clickAnalysisBoard()
 	{
 		driver.findElement(analysisBoardButton).click();
+	}
+	
+	public void clickImportGame()
+	{
+		driver.findElement(importGameButton).click();
 	}
 }

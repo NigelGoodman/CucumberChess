@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,15 +21,23 @@ public class CucumberChessAnalysis
 	public static WebDriver driver;
 	public static menuBar testMenuBar;
 	public static analysisBoard testAnalysisBoard;
-        
-    @Given("^the user is on lichess$")
-    public void the_user_is_on_lichess() throws Throwable 
+    
+	@Before
+    public void beforeTest()
     {
-        
+		if (driver != null) {
+	    	driver.quit();}
     	System.setProperty("webdriver.gecko.driver","geckodriver.exe");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://lichess.org/");
+        
+    }
+	
+	
+    @Given("^the user is on lichess$")
+    public void the_user_is_on_lichess() throws Throwable 
+    {
+    	driver.get("http://lichess.org/");
     }
 
     @Given("^they hover over the tools menu$")
@@ -212,7 +221,8 @@ public class CucumberChessAnalysis
     @After
     public void afterTest() 
     {
-    	driver.quit();
+    	if (driver != null) {
+    	driver.quit();}
     }
     
 }

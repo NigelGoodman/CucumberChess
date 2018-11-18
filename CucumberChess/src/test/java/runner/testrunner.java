@@ -10,7 +10,8 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 features = "src/test/javaFeatures"
-,glue= {"seleniumgluecode"}
+,glue= {"seleniumgluecode"},
+tags= {"@analysis,@import"}
 )
 
 public class testrunner {

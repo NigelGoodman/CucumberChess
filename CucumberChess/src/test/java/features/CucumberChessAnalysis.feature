@@ -1,4 +1,4 @@
-@tag
+@analysis
 Feature: The user can use the lichess analysis board
   I want the user to be able to navigate to and use the analysis board on lichess.org
 
