@@ -26,19 +26,13 @@ public class importGame
 	public static importGamePage testImportGamePage;
 	public static analysisBoard testAnalysisBoard;
 	
-	@Before
-    public void beforeTest()
-    {
+	@Given("^the user is on lichess\\.org$")
+	public void the_user_is_on_lichess_org() throws Throwable 
+	{
 		if (driver != null) {driver.quit();}
     	System.setProperty("webdriver.gecko.driver","geckodriver.exe");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        
-    }
-	
-	@Given("^the user is on lichess\\.org$")
-	public void the_user_is_on_lichess_org() throws Throwable 
-	{
 	    driver.get("http://lichess.org/");
 	}
 
