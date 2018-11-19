@@ -25,12 +25,10 @@ public class CucumberChessAnalysis
 	@Before
     public void beforeTest()
     {
-		if (driver != null) {
-	    	driver.quit();}
+		if (driver != null) {driver.quit();}
     	System.setProperty("webdriver.gecko.driver","geckodriver.exe");
         driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);        
     }
 	
 	
@@ -221,8 +219,10 @@ public class CucumberChessAnalysis
     @After
     public void afterTest() 
     {
-    	if (driver != null) {
-    	driver.quit();}
+    	if (driver != null) 
+    	{
+    		driver.quit();
+    	}
     }
     
 }

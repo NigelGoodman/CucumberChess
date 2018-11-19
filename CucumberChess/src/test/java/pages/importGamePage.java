@@ -11,7 +11,9 @@ public class importGamePage
 	private static char[] titleOfPage = "Import game • lichess.org".toCharArray();
 	private static By pasteBox = By.id("pgn");
 	private static By submitButton = By.cssSelector(".submit");
-	private static By gameInfo = By.cssSelector(".game_infos");//By.className("spinner");
+	private static By gameInfo = By.cssSelector(".game_infos");
+	private static By whitePlayer = By.cssSelector("div.player:nth-child(1) > span:nth-child(1)");
+	private static By blackPlayer = By.cssSelector("div.player:nth-child(2) > span:nth-child(1)");
 	
 	public importGamePage(WebDriver testDriver) 
 	{
@@ -44,9 +46,23 @@ public class importGamePage
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		
 	    wait.until(ExpectedConditions.visibilityOf(driver.findElement(gameInfo)));
-		return driver.findElement(gameInfo).isDisplayed();
-		
+		return driver.findElement(gameInfo).isDisplayed();		
 	}
 	
+	public String returnPlayerName(By playerName)
+	{
+		return driver.findElement(playerName).getText().substring(0, driver.findElement(playerName).getText().length()-4);
+	}
+	
+	public String returnWhitePlayerName()
+	{
+		
+		return this.returnPlayerName(whitePlayer);
 
+	}
+	
+	public String returnBlackPlayerName()
+	{
+		return this.returnPlayerName(blackPlayer);
+	}
 }

@@ -1,6 +1,6 @@
 package seleniumgluecode;
 
-import java.awt.MenuBar;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -29,8 +29,7 @@ public class importGame
 	@Before
     public void beforeTest()
     {
-		if (driver != null) {
-	    	driver.quit();}
+		if (driver != null) {driver.quit();}
     	System.setProperty("webdriver.gecko.driver","geckodriver.exe");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -38,14 +37,14 @@ public class importGame
     }
 	
 	@Given("^the user is on lichess\\.org$")
-	public void the_user_is_on_lichess_org() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		
-        driver.get("http://lichess.org/");
+	public void the_user_is_on_lichess_org() throws Throwable 
+	{
+	    driver.get("http://lichess.org/");
 	}
 
 	@Given("^they hover over the tools menu to import a game$")
-	public void they_hover_over_the_tools_menu_to_import_a_game() throws Throwable {
+	public void they_hover_over_the_tools_menu_to_import_a_game() throws Throwable 
+	{
 	    testMenuBar = new menuBar(driver);
 	    testMenuBar.hoverOverTools();
 	}
@@ -53,10 +52,7 @@ public class importGame
 	@When("^they click on Import game$")
 	public void they_click_on_Import_game() throws Throwable 
 	{
-		
-	    //testMenuBar = new menuBar(driver);
-	    //testMenuBar.hoverOverTools();
-	    testMenuBar.clickImportGame();
+		testMenuBar.clickImportGame();
 	}
 
 	@Then("^they are taken to the Import game page$")
@@ -89,21 +85,34 @@ public class importGame
 	}
 
 	@Then("^they are taken to the imported \"([^\"]*)\"$")
-	public void they_are_taken_to_the_imported(String arg1) throws Throwable {
+	public void they_are_taken_to_the_imported(String arg1) throws Throwable 
+	{
 	    Assert.assertTrue("The infobox is not visible ", testImportGamePage.gameInfoIsVisible());;
 	}
 	
 	@Given("^the user has imported the \"([^\"]*)\"$")
-	public void the_user_has_imported_the(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void the_user_has_imported_the(String arg1) throws Throwable 
+	{
+	    the_user_is_on_the_Import_game_page();
+	    they_have_pasted_inthe_PGN_for(null);
+	    they_click_the_import_game_button();
+	    they_are_taken_to_the_imported(null);
+	    
 	}
 
-	@Then("^the correct player names are displayed$")
-	public void the_correct_player_names_are_displayed() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	@Then("^the white player is \"([^\"]*)\"$")
+	public void the_white_player_is(String arg1) throws Throwable 
+	{
+		Assert.assertArrayEquals("Actual player Name : " + testImportGamePage.returnWhitePlayerName() , arg1.toCharArray(), testImportGamePage.returnWhitePlayerName().toCharArray());
 	}
+
+	@Then("^the black player is \"([^\"]*)\"$")
+	public void the_black_player_is(String arg1) throws Throwable 
+	{
+		Assert.assertArrayEquals("Actual player Name : " + testImportGamePage.returnBlackPlayerName() , arg1.toCharArray(), testImportGamePage.returnBlackPlayerName().toCharArray());
+
+	}
+
 		
 	private String readFile(String path, Charset encoding) throws IOException 
 	{
