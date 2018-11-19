@@ -2,17 +2,20 @@
 Feature: The user can use the lichess analysis board
   I want the user to be able to navigate to and use the analysis board on lichess.org
 
+@analysis
 Scenario: Go to Analysis board
  Given the user is on lichess
  And they hover over the tools menu
  When they click on Analysis board
  Then They are taken to the analysis board
- 
+
+@analysis
 Scenario: Turn on analysis
  Given the user is on the analysis board
  When they turn the analysis on
  Then analysis activates
- 
+
+@analysis 
 Scenario Outline: Move pips shown for knights from opening squares
 	Given the user is on the analysis board
 	When they click on the <knight> knight
@@ -22,7 +25,8 @@ Scenario Outline: Move pips shown for knights from opening squares
 	| knight | location1 | location2 |
 	|   b1   |     a3    |    c3     |
 	|   g1   |     f3    |    h3     |
-	
+
+@analysis	
 Scenario Outline: Move pips shown for pawns from opening squares
 	Given the user is on the analysis board
 	When they click on the <pawn> pawn
@@ -38,7 +42,8 @@ Scenario Outline: Move pips shown for pawns from opening squares
 	|   f2   |     "f3"    |    "f4"     |
 	|   g2   |     "g3"    |    "g4"     |
 	|   h2   |     "h3"    |    "h4"     |	
-	
+
+@analysis	
 Scenario: Playing the Ruy Lopez is recognised as by the opening display
 	Given the user is on the analysis board
 	And the moves "1. e4 e5 2. Nf3 Nc6" have been played
