@@ -9,7 +9,7 @@ public class importGamePage
 {
 	private static WebDriver driver;
 	private static char[] titleOfPage = "Import game • lichess.org".toCharArray();
-	private static By pasteBox = By.id("pgn");
+	private static By pasteBox = By.name("pgn");
 	private static By submitButton = By.cssSelector(".submit");
 	private static By gameInfo = By.cssSelector(".game_infos");
 	private static By whitePlayer = By.cssSelector("div.player:nth-child(1) > span:nth-child(1)");
