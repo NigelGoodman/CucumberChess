@@ -30,6 +30,7 @@ public class CucumberChessAnalysis
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
     	driver.get("http://lichess.org/");
+    
     }
 
     @Given("^they hover over the tools menu$")

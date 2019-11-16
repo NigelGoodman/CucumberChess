@@ -7,9 +7,9 @@ import org.openqa.selenium.interactions.Actions;
 public class menuBar 
 {
 	private static WebDriver driver;
-	private static By toolsMenuButton = By.cssSelector("#topmenu > section:nth-child(5) > a:nth-child(1)");
+	private static By toolsMenuButton = By.cssSelector("#topnav > section:nth-child(5) > a:nth-child(1)");
 	private static By analysisBoardButton = By.linkText("Analysis board");
-	private static By importGameButton = By.cssSelector("#topmenu > section:nth-child(5) > div:nth-child(2) > a:nth-child(4)");//By.linkText("Import game");
+	private static By importGameButton = By.cssSelector("#topnav > section:nth-child(5) > div:nth-child(2) > a:nth-child(3)");//By.linkText("Import game");
 	
 	
 	
