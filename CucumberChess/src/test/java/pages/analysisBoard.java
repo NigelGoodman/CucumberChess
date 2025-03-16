@@ -1,10 +1,21 @@
 package pages;
 
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.sun.tools.javac.util.Assert;
 
 public class analysisBoard 
 {
@@ -29,7 +40,7 @@ public class analysisBoard
 	private static By dest2 = By.cssSelector("square.move-dest:nth-child(2)");
 	private static By dest3 = By.cssSelector("square.move-dest:nth-child(3)");
 	private static By e7Pawn = By.cssSelector("piece.black.pawn:nth-child(15)");
-	private static By openingBox = By.className("opening_box");
+	private static By openingBox = By.cssSelector(".analyse__wiki-text > h2:nth-child(1)");
 	private static String expectedDestinationString;
 	private static By expectedDestinationBy;
 		
@@ -55,9 +66,35 @@ public class analysisBoard
 	}
 	
 	public void waitUntilExpectedString(String expectedString, By usedElement)
-	{
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-	    wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(usedElement), expectedString));
+	{	
+		
+//		//FluentWait<WebDriver> 
+//	
+//		Wait wait = new FluentWait(WebDriver reference)
+//		.withTimeout(Duration.ofSeconds(SECONDS))
+//		.pollingEvery(Duration.ofSeconds(SECONDS))
+//		.ignoring(Exception.class);
+		
+	 
+		
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.pollingEvery(Duration.ofSeconds(5)).withTimeout(Duration.ofSeconds(20));
+		 wait.until(new Function<WebDriver, WebElement>(){ //booleans were web elements
+		
+			public WebElement apply(WebDriver driver ) {
+				String searchString = "//*[contains(text(), '"+expectedString+"')]";
+				System.out.println(searchString);
+				return driver.findElement(By.xpath(searchString));
+				}}
+			);
+		
+
+		
+//    	System.out.println(  driver.findElement(usedElement).getText());
+		
+	
+		//WebDriverWait waitX = new WebDriverWait(driver, 20,5);
+	    //wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(usedElement), expectedString));
 	}
 	
 	public void waitUntilExpectedEvaluation(String expectedEval)
@@ -140,13 +177,13 @@ public class analysisBoard
 	public void moveE7toE5()
 	{
 		this.clickOnPiece(e7Pawn);
-		this.clickOnPiece(dest1);
+		this.clickOnPiece(dest2);
 	}
 	
 	public void ruyLopezmoveNg1tof3()
 	{
 		this.clickOnPiece(ruyLopezg1Knight);
-		this.clickOnPiece(dest3);
+		this.clickOnPiece(dest2);
 	}
 	
 	public void moveNb8toc6()
@@ -229,7 +266,7 @@ public class analysisBoard
 	
 	public String displayedOpening()
 	{
-		return driver.findElement(openingBox).getAttribute("title");
+		return driver.findElement(openingBox).getText();
 	}
 	
 	

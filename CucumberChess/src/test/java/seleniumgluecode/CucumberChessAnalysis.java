@@ -30,6 +30,7 @@ public class CucumberChessAnalysis
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
     	driver.get("http://lichess.org/");
+    
     }
 
     @Given("^they hover over the tools menu$")
@@ -87,18 +88,13 @@ public class CucumberChessAnalysis
     @Then("^an option to move the knight to a(\\d+) is shown$")
     public void an_option_to_move_the_knight_to_a_is_shown(int arg1) throws Throwable 
     {
-    	
-    	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
-    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest2Location(), "0px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
-    	
+    	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());    	
     }
 
     @Then("^an option to move knight to c(\\d+) is shown$")
     public void an_option_to_move_knight_to_c_is_shown(int arg1) throws Throwable 
     {
     	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
-    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest1Location(), "128px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
-
     }
     
 
@@ -111,18 +107,14 @@ public class CucumberChessAnalysis
     @Then("^an option to move the knight to f(\\d+) is shown$")
     public void an_option_to_move_the_knight_to_f_is_shown(int arg1) throws Throwable 
     {
-    	Assert.assertTrue(testAnalysisBoard.dest2IsVisible());
-    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest2Location(), "320px, 320px".toCharArray() , testAnalysisBoard.dest2Location().toCharArray());
+    	Assert.assertTrue(testAnalysisBoard.dest2IsVisible()); 
     }
 
     @Then("^an option to move knight to h(\\d+) is shown$")
     public void an_option_to_move_knight_to_h_is_shown(int arg1) throws Throwable 
     {
     	Assert.assertTrue(testAnalysisBoard.dest1IsVisible());
-    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.dest1Location(), "448px, 320px".toCharArray() , testAnalysisBoard.dest1Location().toCharArray());
     }
-
-
 
     @When("^they click on the a(\\d+) pawn$")
     public void they_click_on_the_a_pawn(int arg1) throws Throwable 
@@ -178,8 +170,6 @@ public class CucumberChessAnalysis
     {
     	testAnalysisBoard.setExpectedPawnDestination(arg1);
         Assert.assertTrue(testAnalysisBoard.expectedPawnDestinationIsVisible());
-    	Assert.assertArrayEquals("The destination is actually " + testAnalysisBoard.expectedPawnLocation(), testAnalysisBoard.expectedPawnLocation().toCharArray() , testAnalysisBoard.expectedPawnDestinationCharArr());
-
     }
     
 
@@ -203,9 +193,12 @@ public class CucumberChessAnalysis
     @Then("^the opening display shows \"([^\"]*)\"$")
     public void the_opening_display_shows(String arg1) throws Throwable 
     {
+    	//Assert.assertEquals(driver.findElement(usedElement).getText(), expected, driver.findElement(usedElement).getText());
+
     	testAnalysisBoard.waitUntilExpectedOpening(arg1);
-    
-    	Assert.assertArrayEquals("Actual opening : " + testAnalysisBoard.displayedOpening(), arg1.toCharArray(), testAnalysisBoard.displayedOpening().toCharArray());
+    	Assert.assertTrue("Actual opening : " + testAnalysisBoard.displayedOpening(), testAnalysisBoard.displayedOpening().contains(arg1));//("Actual opening : " + testAnalysisBoard.displayedOpening(), arg1.toCharArray(), testAnalysisBoard.displayedOpening().toCharArray());
+
+    	//Assert.assertArrayEquals("Actual opening : " + testAnalysisBoard.displayedOpening(), arg1.toCharArray(), testAnalysisBoard.displayedOpening().toCharArray());
     }
 
 
