@@ -11,7 +11,7 @@ public class importGamePage
 	private static char[] titleOfPage = "Import game • lichess.org".toCharArray();
 	private static By pasteBox = By.name("pgn");
 	private static By submitButton = By.cssSelector(".submit");
-	private static By gameInfo = By.cssSelector(".game_infos");
+	private static By gameInfo = By.cssSelector(".game__meta__players");
 	private static By whitePlayer = By.cssSelector("div.player:nth-child(1) > span:nth-child(1)");
 	private static By blackPlayer = By.cssSelector("div.player:nth-child(2) > span:nth-child(1)");
 	
@@ -44,7 +44,6 @@ public class importGamePage
 	public boolean gameInfoIsVisible()
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
-		
 	    wait.until(ExpectedConditions.visibilityOf(driver.findElement(gameInfo)));
 		return driver.findElement(gameInfo).isDisplayed();		
 	}
